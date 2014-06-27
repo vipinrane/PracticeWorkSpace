@@ -17,7 +17,7 @@ public class AjaxJsonAction implements Action{
 
 	private Map<String, String> stateMap = new LinkedHashMap<String, String>();
 	private String dummyMsg;
-	//Parameter for Jquery
+	//Parameter for Jquery a
 	private String countryName;
 	private String eventName;
 //
