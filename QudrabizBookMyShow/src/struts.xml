@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+"-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+"http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+<package name="default" extends="json-default">
+		
+	<action name="getEvents" class="com.action.AjaxJsonAction" >
+		<result name="success">/index.jsp</result>
+		<result name="error">/error.jsp</result>
+	</action>
+	
+	<action name="populateEventDate" class="com.action.AjaxJsonAction" method="populateShow">
+<!-- 		<result type="json">/index.jsp</result> -->
+			<result name="success">/index.jsp</result>
+	</action>
+	
+</package>
+</struts>
