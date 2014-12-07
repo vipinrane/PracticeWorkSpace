@@ -1,0 +1,17 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: JqueryJsonStruts2
+Bundle-SymbolicName: JqueryJsonStruts2
+Bundle-Version: 1.0.0.qualifier
+Bundle-ClassPath: JqueryJsonStruts2.jar,
+ Java/jre7/lib/alt-rt.jar,
+ Java/jre7/lib/charsets.jar,
+ Java/jre7/lib/deploy.jar,
+ Java/jre7/lib/javaws.jar,
+ Java/jre7/lib/jce.jar,
+ Java/jre7/lib/jsse.jar,
+ Java/jre7/lib/management-agent.jar,
+ Java/jre7/lib/plugin.jar,
+ Java/jre7/lib/resources.jar,
+ Java/jre7/lib/rt.jar
+Export-Package: com.action
