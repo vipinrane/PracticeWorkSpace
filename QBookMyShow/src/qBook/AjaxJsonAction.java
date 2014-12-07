@@ -15,6 +15,8 @@ public class AjaxJsonAction implements Action {
 	// Parameter for Jquery
 	private String eventName;
 	private String eventId;
+	
+	private DatabaseUtility objDatabaseUtility=new DatabaseUtility();
 
 	public String execute() {
 		System.out.println("inside Execute");
@@ -29,15 +31,8 @@ public class AjaxJsonAction implements Action {
 		Connection conn = null;
 
 		try {
-			String URL = "jdbc:mysql://paviliondv4:3306/bookmyshow_dates";
-			Class.forName("com.mysql.jdbc.Driver");
-			conn = DriverManager.getConnection(URL, "qbook", "qbook123");
-
-			String sql = "SELECT DISTINCT * FROM EVENTS";
-			// String sql ="SELECT * FROM user3333";
-			PreparedStatement ps = conn.prepareStatement(sql);
-
-			ResultSet rs = ps.executeQuery();
+			String sqlEvents = "SELECT DISTINCT * FROM EVENTS";
+			ResultSet rs= DatabaseUtility.getResultSet(sqlEvents);
 
 			while (rs.next()) {
 				eventList.put(rs.getString("EventId"),
@@ -61,15 +56,9 @@ public class AjaxJsonAction implements Action {
 	}
 
 	public void populateShow(String eventId) {
-		// System.out.println("parameter:"+eventId);
 		Connection conn = null;
 		try {
-			String URL = "jdbc:mysql://paviliondv4:3306/bookmyshow_dates";
-			Class.forName("com.mysql.jdbc.Driver");
-			conn = DriverManager.getConnection(URL, "qbook", "qbook123");
-			System.out.println("Connection State=" + conn.isClosed());
-
-			String sql = "SELECT ShowId,EventDate,\r\n"
+			String sqlShow = "SELECT ShowId,EventDate,\r\n"
 					+ "CASE \r\n"
 					+ "	WHEN DATEDIFF(EventDate,NOW()) = 0 THEN CONCAT('Today',', ',DAY(EventDate),' ',MONTHNAME(EventDate))\r\n"
 					+ "	WHEN DATEDIFF(EventDate,NOW()) = 1 THEN CONCAT('Tomorrow',', ',DAY(EventDate),' ',MONTHNAME(EventDate))\r\n"
@@ -79,11 +68,8 @@ public class AjaxJsonAction implements Action {
 					+ "FROM EventShows es\r\n"
 					+ "INNER JOIN EVENTS e ON es.EventId = e.EventId AND (EventDate>=NOW())\r\n"
 					+ "WHERE e.EventId=" + eventId + ";";
-			// String sql ="SELECT * FROM user3333";
-			System.out.println("Query:" + sql);
-			PreparedStatement ps = conn.prepareStatement(sql);
-
-			ResultSet rs = ps.executeQuery();
+			System.out.println("Query:" + sqlShow);
+			ResultSet rs = DatabaseUtility.getResultSet(sqlShow);
 
 			while (rs.next()) {
 				stateMap.put(rs.getString("ShowId"), rs.getString("EventDay"));
